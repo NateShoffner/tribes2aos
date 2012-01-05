@@ -3,6 +3,7 @@ version = '1.0'
 author = 'SLoW'
 description = ('A remix of the classic Tribes 2 map Firestorm.')
 extensions = { 'water_damage' : 25 }
+protected = ['B5', 'G4']
 
 # scripting
 
