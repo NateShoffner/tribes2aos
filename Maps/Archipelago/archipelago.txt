@@ -1,0 +1,62 @@
+name = 'Archipelago'
+version = '1.0'
+author = 'SLoW'
+description = ('A remake of the classic Tribes 2 map Archipelago')
+protected = ['D1', 'E8']
+
+# scripting
+
+import random
+from pyspades.constants import *
+from pyspades.server import ServerConnection
+from commands import say
+
+def get_entity_location(team, entity_id):
+    if entity_id == BLUE_FLAG:
+        # puts only the blue flag in the blue base
+        #z = team.protocol.map.get_z(109, 274)
+        return (270, 470, 41)
+    if entity_id == BLUE_BASE:
+        # puts only the blue flag in the blue base
+        #z = team.protocol.map.get_z(113, 315)
+        return (270, 475, 37)
+    if entity_id == GREEN_FLAG:
+        # puts only the green flag in the green base
+        #z = team.protocol.map.get_z(392, 306)
+        return (240, 29, 41)
+    if entity_id == GREEN_BASE:
+        # puts only the blue flag in the blue base
+        #z = team.protocol.map.get_z(408, 330)
+        return (242, 24, 37)
+
+def get_spawn_location(connection):
+    if connection.team is connection.protocol.blue_team:
+        x, y, z = ServerConnection.get_spawn_location(connection)
+        r = random.randrange(0, 5)
+        #spawn AT base
+        if r == 1:
+            return (292, 483, 51)
+        #spawn AT flag
+        elif r == 2:
+            return (269, 480, 55)
+        #spawn BETWEEN bases
+        elif r == 3:
+            return (279, 476, 53)
+        #spawn AT remote tower
+        elif r <= 4:
+            return (241, 233, 50)
+    if connection.team is connection.protocol.green_team:
+        x, y, z = ServerConnection.get_spawn_location(connection)
+        r = random.randrange(0, 5)
+        #spawn AT base
+        if r == 1:
+            return (221, 7, 51)
+        #spawn AT flag
+        elif r == 2:
+            return (240, 17, 52)
+        #spawn BETWEEN bases
+        elif r == 3:
+            return (232, 16, 52)
+        #spawn AT remote tower
+        elif r <= 4:
+            return (297, 244, 52)
