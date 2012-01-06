@@ -3,6 +3,7 @@ version = '1.0'
 author = 'Deucebag and SLoW'
 description = ('A remake of the classic Tribes 1 map Raindance')
 protected = ['B5', 'G4']
+fog = (110, 130, 255)
 
 # scripting
 

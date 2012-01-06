@@ -3,6 +3,7 @@ version = '1.0'
 author = 'Deucebag'
 description = ('A blatant bastardization of the Tribes 2 map Snowblind.')
 extensions = { 'water_damage' : 0 }
+fog = (170, 170, 170)
 
 # scripting
 

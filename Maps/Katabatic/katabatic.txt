@@ -1,7 +1,8 @@
 name = 'Katabatic'
-version = '.1'
+version = '1.0'
 author = 'Deucebag and SLoW'
 description = ('A remake of the classic Tribes 2 map Katabatic.')
+fog = (170, 170, 170)
 
 # scripting
 

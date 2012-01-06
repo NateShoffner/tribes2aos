@@ -3,6 +3,7 @@ version = '1.0'
 author = 'SLoW'
 description = ('A remake of the classic Tribes 2 map Archipelago')
 protected = ['D1', 'E8']
+fog = (160, 160, 160)
 
 # scripting
 
