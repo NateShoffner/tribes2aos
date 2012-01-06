@@ -23,7 +23,7 @@ def get_entity_location(team, entity_id):
     if entity_id == GREEN_FLAG:
         # puts only the green flag in the green base
         #z = team.protocol.map.get_z(392, 306)
-        return (240, 29, 41)
+        return (241, 29, 41)
     if entity_id == GREEN_BASE:
         # puts only the blue flag in the blue base
         #z = team.protocol.map.get_z(408, 330)
