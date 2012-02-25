@@ -1,5 +1,5 @@
 name = 'Firestorm'
-version = '1.0'
+version = '1.1'
 author = 'SLoW'
 description = ('A remix of the classic Tribes 2 map Firestorm.')
 extensions = { 'water_damage' : 25 }
@@ -8,7 +8,7 @@ fog = (232, 128, 5)
 
 # scripting
 
-import random
+from random import randrange, choice
 from pyspades.constants import *
 from pyspades.server import ServerConnection
 from commands import say
@@ -34,31 +34,22 @@ def get_entity_location(team, entity_id):
 def get_spawn_location(connection):
     if connection.team is connection.protocol.blue_team:
         x, y, z = ServerConnection.get_spawn_location(connection)
-        r = random.randrange(0, 5)
-        #spawn AT base
-        if r == 1:
-            return (67, 274, 41)
-        #spawn IN base
-        elif r == 2:
-            return (79, 273, 25)
-        #spawn BEHIND base
-        elif r == 3:
-            return (69, 283, 41)
-        #spawn BEHIND intel
-        elif r <= 4:
-            return (71, 262, 41)
+        positions = (79, 273)
+        xdif = randrange(-30, 30)
+        ydif = randrange(-30, 30)
+        x, y = positions
+        newx = max(0, min(511, x + xdif))
+        newy = max(0, min(511, y + ydif))
+        newz = connection.protocol.map.get_z(newx, newy)
+        return (newx, newy, newz)
+
     if connection.team is connection.protocol.green_team:
         x, y, z = ServerConnection.get_spawn_location(connection)
-        r = random.randrange(0, 5)
-        #spawn AT base
-        if r == 1:
-            return (442, 232, 44)
-        #spawn IN base
-        elif r == 2:
-            return (430, 232, 29)
-        #spawn BEHIND base
-        elif r == 3:
-            return (440, 222, 45)
-        #spawn BEHIND intel
-        elif r <= 4:
-            return (438, 241, 43)
+        positions = (430, 232)
+        xdif = randrange(-30, 30)
+        ydif = randrange(-30, 30)
+        x, y = positions
+        newx = max(0, min(511, x + xdif))
+        newy = max(0, min(511, y + ydif))
+        newz = connection.protocol.map.get_z(newx, newy)
+        return (newx, newy, newz)

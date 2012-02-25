@@ -1,12 +1,12 @@
 name = 'Katabatic'
-version = '1.0'
+version = '1.1'
 author = 'Deucebag and SLoW'
 description = ('A remake of the classic Tribes 2 map Katabatic.')
 fog = (170, 170, 170)
 
 # scripting
 
-import random
+from random import randrange, choice
 from pyspades.constants import *
 from pyspades.server import ServerConnection
 from commands import say
@@ -32,29 +32,23 @@ def get_entity_location(team, entity_id):
 def get_spawn_location(connection):
     if connection.team is connection.protocol.blue_team:
         x, y, z = ServerConnection.get_spawn_location(connection)
-        #spawn AT remote tower
-        if x < 33:
-            return (211, 279, 25)
-        #spawn IN base
-        elif x < 65:
-            return (130, 130, 50)
-        #spawn AT base
-        elif x < 97:
-            return (110, 110, 50)
-        #spawn IN remote tower 2
-        elif x <= 128:
-            return (226, 273, 6)
+        positions = [(130, 123), (222, 269)]
+        xdif = randrange(-30, 30)
+        ydif = randrange(-30, 30)
+        x, y = choice(positions)
+        newx = max(0, min(511, x + xdif))
+        newy = max(0, min(511, y + ydif))
+        newz = connection.protocol.map.get_z(newx, newy)
+        return (newx, newy, newz)
+
     if connection.team is connection.protocol.green_team:
         x, y, z = ServerConnection.get_spawn_location(connection)
-        #spawn AT remote tower
-        if x < 417:
-            return (355, 191, 28)
-        #spawn IN base
-        elif x < 449:
-            return (399, 307, 39)
-        #spawn AT base
-        elif x < 481:
-            return (408, 330, 45)
-        #spawn IN remote tower 2
-        elif x <= 512:
-            return (353, 149, 6)
+        x, y, z = ServerConnection.get_spawn_location(connection)
+        positions = [(392, 306), (350, 153)]
+        xdif = randrange(-30, 30)
+        ydif = randrange(-30, 30)
+        x, y = choice(positions)
+        newx = max(0, min(511, x + xdif))
+        newy = max(0, min(511, y + ydif))
+        newz = connection.protocol.map.get_z(newx, newy)
+        return (newx, newy, newz)
